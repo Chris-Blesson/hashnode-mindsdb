@@ -1,4 +1,3 @@
-import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import InputField from "./Fields/InputField";
 import Phone from "../Icons/Phone";
@@ -9,7 +8,6 @@ import { requestWrapper } from "@/lib/requestWrapper";
 import Button from "../Buttons";
 
 const AccountRegistrationForm = ({
-  accountId,
   type = "candidate",
   currentOrg = null,
   resumeFileUrl = "",
@@ -18,7 +16,6 @@ const AccountRegistrationForm = ({
     mode: "onSubmit",
   });
   const isCandidate = type === "candidate";
-  const router = useRouter();
   const onSubmitHandler = (data) => {
     const updateData = {
       ...data,
@@ -26,16 +23,18 @@ const AccountRegistrationForm = ({
       organisation_id: currentOrg,
       document_url: resumeFileUrl,
     };
-    requestWrapper(`account/${accountId}`, {
-      method: "PUT",
+    requestWrapper(`account`, {
+      method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify(updateData),
     }).then(
       () => {
-        router.refresh();
         toast.success("Information updated successfuly");
+        setTimeout(() => {
+          window.location.reload();
+        }, 500);
       },
       () => {
         toast.error("Unable to update the information");

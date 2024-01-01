@@ -5,7 +5,7 @@ import FileUpload from "../FileUpload/FileUpload";
 import { useState } from "react";
 import Button from "../Buttons";
 
-const CandidateRegistration = ({ setPathComponent, accountId }) => {
+const CandidateRegistration = ({ setPathComponent }) => {
   const [resumeFileUrl, setResumeFileUrl] = useState("");
   return (
     <div className="p-10 flex flex-col gap-y-10">
@@ -30,10 +30,7 @@ const CandidateRegistration = ({ setPathComponent, accountId }) => {
             setResumeFileUrl(url);
           }}
         />
-        <AccountRegistrationForm
-          accountId={accountId}
-          resumeFileUrl={resumeFileUrl}
-        />
+        <AccountRegistrationForm resumeFileUrl={resumeFileUrl} />
       </div>
       <Toast />
     </div>

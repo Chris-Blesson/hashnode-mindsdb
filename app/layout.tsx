@@ -3,9 +3,10 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import { NextUiProvider } from "./Components/NextUiProvider";
 import UserContextProvider from "./Providers/UserContextProvider";
-import { ClerkProvider } from "@clerk/nextjs";
 import Applayout from "./Components/Applayout.tsx";
 import clsx from "clsx";
+import { SuperTokensProvider } from "./Providers/SuperTokensProvider";
+import SessionAuthProvider from "./Providers/SessionAuthProvider";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
@@ -19,21 +20,17 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <ClerkProvider>
-      <html lang="en">
+    <html lang="en">
+      <SuperTokensProvider>
         <body
           className={clsx(
             inter.className,
             "h-screen overflow-hidden text-[#27313b]"
           )}
         >
-          <UserContextProvider>
-            <NextUiProvider>
-              <Applayout>{children}</Applayout>
-            </NextUiProvider>
-          </UserContextProvider>
+          <SessionAuthProvider>{children}</SessionAuthProvider>
         </body>
-      </html>
-    </ClerkProvider>
+      </SuperTokensProvider>
+    </html>
   );
 }

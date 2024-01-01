@@ -94,7 +94,7 @@ const ChooseOrganization = ({ selectCurrentOrg }) => {
     </div>
   );
 };
-const OrganizationRegistration = ({ setPathComponent, accountId }) => {
+const OrganizationRegistration = ({ setPathComponent }) => {
   const [currentOrg, selectCurrentOrg] = useState(null);
   return (
     <div className="p-10 flex flex-col gap-y-10">
@@ -117,7 +117,6 @@ const OrganizationRegistration = ({ setPathComponent, accountId }) => {
         {}
         <ChooseOrganization selectCurrentOrg={selectCurrentOrg} />
         <AccountRegistrationForm
-          accountId={accountId}
           type="hiring_manager"
           currentOrg={currentOrg}
         />

@@ -12,7 +12,8 @@ const FlowPath = ({ setPathComponent }) => {
       <div className="text-content-wrapper flex flex-col gap-y-2">
         <h2 className="header-1-600">Join Us!</h2>
         <p className="line-clamp-2 max-w-[400px] text-[#8692A6]">
-          To being this journey, tell us what type of account you'd be opening
+          To being this journey, tell us what type of account you&apos;d be
+          opening
         </p>
       </div>
       <div className="path-wrapper flex flex-col gap-y-4">
@@ -54,14 +55,14 @@ const PathCard = ({ path, title, description, icon, setPathComponent }) => {
   );
 };
 
-const RegisterPath = ({ accountId }) => {
+const RegisterPath = () => {
   const [pathComponent, setPathComponent] = useState("path");
   return (
     <div className="bg-white text-black flex w-full">
       <div className="gradient min-w-[900px] min-h-[100vh] bg-gradient-to-r from-cyan-500 to-blue-500"></div>
       <div
         className={clsx(
-          "w-full h-[100vh]  flex flex-col gap-y-5",
+          "w-full h-[100vh]  flex flex-col gap-y-5 overflow-y-auto",
           pathComponent === "path" && "m-auto justify-center items-center"
         )}
       >
@@ -69,10 +70,10 @@ const RegisterPath = ({ accountId }) => {
           <FlowPath setPathComponent={setPathComponent} />
         )}
         {pathComponent === "candidate" && (
-          <CandidateRegistration accountId={accountId} setPathComponent={setPathComponent} />
+          <CandidateRegistration setPathComponent={setPathComponent} />
         )}
         {pathComponent === "organization" && (
-          <OrganizationRegistration accountId={accountId} setPathComponent={setPathComponent} />
+          <OrganizationRegistration setPathComponent={setPathComponent} />
         )}
       </div>
     </div>
