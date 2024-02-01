@@ -17,6 +17,7 @@ const routeRegex = {
   submissions: /\/submissions/,
   submissionDetails:
     /\/submissions\/[A-Za-z0-9!@#$%^&*()_+{}\[\]:;<>,.?\/\\|~-]+\//,
+  integrations: /\/integrations/,
 };
 const candidateRoutes = [
   routeRegex.learn,
@@ -35,6 +36,7 @@ const hiringManagerRoutes = [
   routeRegex.contestDetails,
   routeRegex.profile,
   routeRegex.recommendations,
+  routeRegex.integrations,
 ];
 const RouteWhitelister = ({ children }) => {
   const { account_type } = useAccountContext();

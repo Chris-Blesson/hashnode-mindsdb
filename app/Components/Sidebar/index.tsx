@@ -5,7 +5,7 @@ import Link from "next/link";
 import { useParams, usePathname } from "next/navigation";
 import { GiBookCover } from "react-icons/gi";
 import { FaUserGraduate } from "react-icons/fa6";
-import { MdOutlineTimer } from "react-icons/md";
+import { MdOutlineTimer, Md1KPlus } from "react-icons/md";
 import { Md3P } from "react-icons/md";
 import { BsDatabase } from "react-icons/bs";
 import { GiChampions } from "react-icons/gi";
@@ -43,6 +43,11 @@ const hiringManagerSidebarOptions = [
     link: "/contest",
     label: "Contests",
     icon: <MdOutlineTimer size={25} />,
+  },
+  {
+    link: "/integrations",
+    label: "Integrations",
+    icon: <Md1KPlus size={25} />,
   },
 ];
 
