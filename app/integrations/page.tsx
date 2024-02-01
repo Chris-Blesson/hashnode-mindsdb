@@ -2,8 +2,6 @@ import { auth } from "@clerk/nextjs";
 import { getAccountDetails } from "../db-handlers/accounts/getAccountDetails";
 import { notFound } from "next/navigation";
 import HeaderSetter from "../Components/Header/HeaderSetter";
-import BreadCrumb from "../Components/BreadCrumb";
-import SubHeader from "../Components/SubHeader";
 import ListAgents from "./IntegrationsDataFetcher";
 
 const Integrations = async () => {
@@ -22,10 +20,7 @@ const Integrations = async () => {
   return (
     <>
       <HeaderSetter title={`Integrations`} />
-      <SubHeader>
-        <BreadCrumb crumbs={crumbs} />
-      </SubHeader>
-      <section className="layout">
+      <section className="layout pt-5">
         <ListAgents />
       </section>
     </>

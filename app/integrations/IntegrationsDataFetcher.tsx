@@ -1,7 +1,6 @@
 import { listAgents } from "@/app/db-handlers/integrations/listAgents";
-import AgentsTable from "./ListAgents/ListAgentTable";
-import IntegrationTab from "./IntegrationTab";
 import { listIntegrations } from "../db-handlers/integrations/listIntegrations";
+import AvailableTabs from "./AvailableTabs";
 
 const ListAgents = async () => {
   const [listOfAgents, listOfIntegrations] = await Promise.all([
@@ -20,7 +19,12 @@ const ListAgents = async () => {
       action: "",
     };
   });
-  return <IntegrationTab integrationList={tableListOfIntegrations} />;
+  return (
+    <AvailableTabs
+      agentList={tableListAgentAdapter}
+      integrationList={tableListOfIntegrations}
+    />
+  );
 };
 
 export default ListAgents;

@@ -1,7 +1,6 @@
 import connect from "@/lib/mindsdb-connection";
 import { NextResponse } from "next/server";
 import MindsDB from "mindsdb-js-sdk";
-import { model } from "@/app/constants/models";
 
 const DB_CREATION_QUERY = (appToken, oauthToken) => {
   return `
@@ -9,8 +8,8 @@ CREATE DATABASE mindsdb_slack
 WITH
   ENGINE = 'slack',
   PARAMETERS = {
-      "token": ${oauthToken},
-      "app_token": ${appToken}
+      "token": "${oauthToken}",
+      "app_token": "${appToken}"
     };
         `;
 };
@@ -27,7 +26,7 @@ export async function POST(req: Request) {
     const requestBody = await req.json();
     const { appToken, oauthToken, chatbotName } = requestBody;
     console.log("request body", requestBody);
-    if (!appToken || oauthToken || chatbotName) {
+    if (!appToken || !oauthToken || !chatbotName) {
       return NextResponse.json(
         {
           message: "Bad Request",

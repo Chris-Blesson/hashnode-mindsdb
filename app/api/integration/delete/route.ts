@@ -13,7 +13,7 @@ export async function POST(req: Request) {
     const requestBody = await req.json();
     const { chatbotName } = requestBody;
     console.log("request body", requestBody);
-    if (chatbotName) {
+    if (!chatbotName) {
       return NextResponse.json(
         {
           message: "Bad Request",

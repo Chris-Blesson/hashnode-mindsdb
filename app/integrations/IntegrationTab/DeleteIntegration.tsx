@@ -5,18 +5,28 @@ import {
   ModalBody,
   ModalFooter,
   Button,
+  ModalHeader,
+  useDisclosure,
 } from "@nextui-org/react";
 import { useState } from "react";
 import { MdDeleteForever } from "react-icons/md";
 
 const DeleteIntegration = ({ chatbotName }) => {
-  const [showDeleteModal, setShowDeleteModal] = useState(false);
+  const { isOpen, onOpen, onOpenChange } = useDisclosure();
   const [isLoading, setIsLoading] = useState(false);
+  const [integrationDeleted, setIntegrationDeleted] = useState(false);
   const deleteHandler = () => {
     setIsLoading(true);
-    requestWrapper("integration/delete")
+    requestWrapper("integration/delete", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ chatbotName }),
+    })
       .then(() => {
-        setShowDeleteModal(false);
+        setIntegrationDeleted(true);
+        window?.location?.reload();
       })
       .finally(() => {
         setIsLoading(false);
@@ -26,7 +36,7 @@ const DeleteIntegration = ({ chatbotName }) => {
     <>
       <button
         onClick={() => {
-          setShowDeleteModal(true);
+          onOpen();
         }}
       >
         <MdDeleteForever size={25} />
@@ -34,25 +44,33 @@ const DeleteIntegration = ({ chatbotName }) => {
       <Modal
         size="2xl"
         backdrop="opaque"
-        isOpen={showDeleteModal}
+        isOpen={isOpen}
+        onOpenChange={onOpenChange}
         placement="top-center"
       >
         <ModalContent>
           {(onClose) => (
             <>
+              <ModalHeader className="flex flex-col gap-1 text-black">
+                Delete Integration
+              </ModalHeader>
               <ModalBody>
-                <p>Are you sure you want to delete the integration?</p>
+                {integrationDeleted ? (
+                  <p>Integration deleted successfully</p>
+                ) : (
+                  <p>Are you sure you want to delete the integration?</p>
+                )}
               </ModalBody>
               <ModalFooter>
                 <Button
-                  color="danger"
+                  color={integrationDeleted ? "default" : "danger"}
                   isLoading={isLoading}
                   isDisabled={isLoading}
-                  onClick={() => {
-                    deleteHandler();
+                  onPress={() => {
+                    integrationDeleted ? onClose() : deleteHandler();
                   }}
                 >
-                  Delete
+                  {integrationDeleted ? "Close" : "Delete"}
                 </Button>
               </ModalFooter>
             </>
